@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
       include: [{model: Product}]
     })
     if(!tagData){
-      res.status(400).json({message: 'No tags were found'})
+      res.status(400).json({message: 'No tags were found'}) // message if there is no tag data at all
     }else{
       res.status(200).json(tagData)
     }
@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
       include: [{model: Product}]
     })
     if(!tagData){
-      res.status(400).json({message: 'No tags with this id were found'})
+      res.status(400).json({message: 'No tags with this id were found'}) // message if no tag with the given id shows up
     }else{
       res.status(200).json(tagData)
     }
@@ -44,9 +44,9 @@ router.post('/', async (req, res) => {
       const tagData = await Tag.create({
         tag_name: req.body.tag_name
       })
-      res.status(200).json({message: 'Tag created'})
+      res.status(200).json({message: 'Tag created'}) // creation confirmation message
     }else{
-      res.status(400).json({message: 'Include a tag_name in your request'})
+      res.status(400).json({message: 'Include a tag_name in your request'}) // message if the user forgets to put in a tag_name property in their body
     }
   }catch(err){
     res.status(500).json(err)
@@ -62,9 +62,9 @@ router.put('/:id', async (req, res) => {
       }
     })
     if(!tagData){
-      res.status(400).json({message: 'No tag with that id was found'})
+      res.status(400).json({message: 'No tag with that id was found'}) // message if no tag with the given id was found
     }else{
-      res.status(200).json({message: 'Tag updated'})
+      res.status(200).json({message: 'Tag updated'}) // confirmation message
     }
   }catch(err){
     res.status(500).json(err)
