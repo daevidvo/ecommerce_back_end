@@ -40,12 +40,16 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // create a new category
   try{
-    const categoryData = Category.create({
-      category_name: req.body.category_name
-    })
-    res.status(200).json({message: 'Category has been created'})
+    if(req.body.category_name){
+      const categoryData = Category.create({
+        category_name: req.body.category_name
+      })
+      res.status(200).json({message: 'Category has been created'})
+    }else{
+      res.status(400).json({message: 'Include a category_name in your request'})
+    }
   }catch(err){
-    res.status(400).json(err)
+    res.status(500).json(err)
   }
 });
 
